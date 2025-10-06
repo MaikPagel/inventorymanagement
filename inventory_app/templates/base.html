@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inventar Management</title>
+    {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'inventory_app/style.css' %}">
+</head>
+<body>
+{% if user.is_authenticated %}
+  <p>Eingeloggt als {{ user.username }}</p>
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+  </form>
+{% else %}
+  <p><a href="{% url 'login' %}">Login</a></p>
+{% endif %}
+  <hr>
+  {% block content %}{% endblock %}
+</body>
+
+<button id="toggle-mode" style="position:fixed;top:10px;right:10px;padding:5px 10px;">🌙 / ☀️</button>
+<script>
+const btn = document.getElementById('toggle-mode');
+btn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    // Optional: LocalStorage speichern, damit Modus beim nächsten Besuch erhalten bleibt
+    if(document.body.classList.contains('dark-mode')){
+        localStorage.setItem('mode','dark');
+    } else {
+        localStorage.setItem('mode','light');
+    }
+});
+
+// Bei Laden prüfen
+if(localStorage.getItem('mode') === 'dark'){
+    document.body.classList.add('dark-mode');
+}
+</script>
+</html>

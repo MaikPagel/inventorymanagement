@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Liste bearbeiten</h2>
+
+<h3>Neuen Gegenstand hinzufügen</h3>
+<form method="post">
+  {% csrf_token %}
+
+  {% if form.errors %}
+    <ul style="color:red;">
+      {% for field in form %}
+        {% for error in field.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+      {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <table>
+    <tr>
+      <td>{{ form.name.label_tag }}</td>
+      <td>{{ form.name }}</td>
+    </tr>
+    <tr>
+      <td>{{ form.quantity.label_tag }}</td>
+      <td>{{ form.quantity }}</td>
+    </tr>
+    <tr>
+      <td>{{ form.description.label_tag }}</td>
+      <td>{{ form.description }}</td>
+    </tr>
+    <tr>
+      <td>{{ form.category.label_tag }}</td>
+      <td>
+        <select name="category">
+          {% for cat in categories %}
+            <option value="{{ cat }}" {% if form.category.value == cat %}selected{% endif %}>{{ cat }}</option>
+          {% endfor %}
+        </select>
+        <br>
+        {{ form.new_category.label_tag }} {{ form.new_category }}
+      </td>
+    </tr>
+  </table>
+  <button type="submit" name="add_item">Hinzufügen</button>
+  <p><a href="{% url 'my_inventory' %}">Zurück zum Inventar</a></p>
+</form>
+
+<hr>
+
+<h3>Bestehende Gegenstände</h3>
+<table border="1" cellpadding="5" cellspacing="0">
+  <tr>
+    <th>Name</th>
+    <th>Menge</th>
+    <th>Beschreibung</th>
+    <th>Kategorie</th>
+    <th>Aktionen</th>
+  </tr>
+  {% for item in items %}
+  <tr>
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="item_id" value="{{ item.id }}">
+      <td><input type="text" name="name" value="{{ item.name }}"></td>
+      <td><input type="number" name="quantity" value="{{ item.quantity }}"></td>
+      <td><input type="text" name="description" value="{{ item.description }}"></td>
+      <td>
+        <select name="category">
+          {% for cat in categories %}
+            <option value="{{ cat }}" {% if item.category == cat %}selected{% endif %}>{{ cat }}</option>
+          {% endfor %}
+        </select>
+      </td>
+      <td>
+        <button type="submit" name="edit_item">Speichern</button>
+        <button type="submit" name="delete_item" onclick="return confirm('Willst du diesen Gegenstand wirklich löschen?');">Löschen</button>
+      </td>
+    </form>
+  </tr>
+  {% empty %}
+  <tr>
+    <td colspan="5">Keine Items vorhanden.</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

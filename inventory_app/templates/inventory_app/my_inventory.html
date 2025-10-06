@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h2>Mein Inventar</h2>
+
+  <!-- Filter und Anzahl Auswahl -->
+  <form method="get" style="margin-bottom: 1em;">
+    <input type="text" name="q" placeholder="Suche..." value="{{ search_query }}">
+    <select name="per_page">
+      <option value="25" {% if per_page == 25 %}selected{% endif %}>25 pro Seite</option>
+      <option value="35" {% if per_page == 35 %}selected{% endif %}>35 pro Seite</option>
+      <option value="50" {% if per_page == 50 %}selected{% endif %}>50 pro Seite</option>
+    </select>
+    <!-- Kategorie-Auswahl -->
+    <select name="category">
+      <option value="">Alle Kategorien</option>
+        {% for cat in categories %}
+      <option value="{{ cat }}" {% if cat == category_filter %}selected{% endif %}>{{ cat }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Anwenden</button>
+    <p><a href="{% url 'edit_inventory' %}">Liste bearbeiten</a></p>
+  </form>
+
+  <!-- Inventarliste -->
+  <ul>
+    {% for item in page_obj %}
+      <li>{{ item.name }} – {{ item.quantity }}</li>
+    {% empty %}
+      <li>Keine Items gefunden.</li>
+    {% endfor %}
+  </ul>
+
+<!-- Pagination -->
+<div style="margin-top: 1em;">
+  {% if page_obj.has_previous %}
+    <a href="?page=1{% if query_params %}&{{ query_params }}{% endif %}">« Erste</a>
+    <a href="?page={{ page_obj.previous_page_number }}{% if query_params %}&{{ query_params }}{% endif %}">‹ Zurück</a>
+  {% endif %}
+
+  <span>Seite {{ page_obj.number }} von {{ page_obj.paginator.num_pages }}</span>
+
+  {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}{% if query_params %}&{{ query_params }}{% endif %}">Weiter ›</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}{% if query_params %}&{{ query_params }}{% endif %}">Letzte »</a>
+  {% endif %}
+</div>
+{% endblock %}
