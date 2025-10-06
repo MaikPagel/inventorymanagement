@@ -8,7 +8,6 @@
 
 Dieses Projekt richtet sich an:
 
-- Entwickler*innen, die Webentwicklung mit Django, PostgreSQL und Tailwind üben möchten.
 - Nicht-technische Stakeholder (z. B. HR Manager, Management), die einen Überblick über digitale Bestandsverwaltungssysteme erhalten möchten.
 - Unternehmen, die ein grundlegendes System zur Verwaltung von Lagerbeständen kennenlernen wollen.
 
@@ -19,8 +18,8 @@ Dieses Projekt richtet sich an:
 Das Inventory Management System ermöglicht:
 
 - Hinzufügen, Bearbeiten und Löschen von Produkten über eine Weboberfläche.
-- Verwaltung von Produktinformationen wie Name, Kategorie, Preis und Lagerbestand.
-- Übersichtlich gestaltetes Frontend mit Tailwind CSS für bessere Benutzerfreundlichkeit.
+- Verwaltung von Produktinformationen wie Name, Kategorie und Lagerbestand.
+- Übersichtlich gestaltetes Frontend für bessere Benutzerfreundlichkeit.
 - Speicherung der Daten in einer **PostgreSQL-Datenbank**.
 
 ---
@@ -29,9 +28,9 @@ Das Inventory Management System ermöglicht:
 
 | Technologie | Verwendung |
 |---|---|
-| Python & Django | Backend-Logik, API, Datenverwaltung |
+| Python & Django | Backend-Logik und Datenverwaltung |
 | PostgreSQL | Datenbank für Produktinformationen |
-| HTML / CSS / Tailwind | Frontend und Styling |
+| HTML / CSS | Frontend und Styling |
 | Django Templates | Verbindung von Backend und Frontend |
 
 ---
@@ -68,9 +67,7 @@ Das Inventory Management System ermöglicht:
 ## 🔮 Zukünftige Erweiterungen
 
 - Rollenverwaltung für unterschiedliche Benutzerrechte (Admin / Mitarbeiter)
-
-- Erweiterte Reporting- und Exportfunktionen
-
+- Erweiterte Reporting- und Exportfunktionen (API Endpoints)
 - Mobile-responsive Design und Optimierung
 
 ## 👤 Wer steckt dahinter & Kontakt
