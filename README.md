@@ -9,7 +9,7 @@
 Dieses Projekt richtet sich an:
 
 - Nicht-technische Stakeholder (z. B. HR Manager, Management), die einen Überblick über digitale Bestandsverwaltungssysteme erhalten möchten.
-- Unternehmen, die ein grundlegendes System zur Verwaltung von Lagerbeständen kennenlernen wollen.
+- Unternehmen, die ein grundlegendes System zur Verwaltung von Lagerbeständen nutzen wollen.
 
 ---
 
@@ -30,7 +30,7 @@ Das Inventory Management System ermöglicht:
 |---|---|
 | Python & Django | Backend-Logik und Datenverwaltung |
 | PostgreSQL | Datenbank für Produktinformationen |
-| HTML / CSS | Frontend und Styling |
+| HTML / CSS | Frontend und Design |
 | Django Templates | Verbindung von Backend und Frontend |
 
 ---
